@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <h1>Hello {{ name }},</h1>
+    <h2>You opened auto-dealership {{ name_auto_salon }} located in {{ location }} on our platform.</h2>
+    <h3>
+            After creation of auto-dealership you obtained owner role.Now you can set up three roles in your
+        auto-dealership through an invitations via email.
+    </h3>
+    <p>
+            Main role is administrator:  makes all tasks that you as owner command.
+        Second role is seller: adds listings and modifies/deletes them.
+        Third role is mechanic: receives requests, from platform users/sellers to make car diagnostics/repairs.
+    </p>
+    <h3 style="background-color: aquamarine">
+            REMEMBER: you can add just three roles as described above.
+        All dealership roles on platform NEEDS full register to be able to send an invitation to desired user.
+        To change any role, you as owner or administrator must delete previous role and after that set up other person on that role.
+        REMEMBER: YOU CAN SET UP JUST ONE USER ON EACH ROLE.
+    </h3>
+    <p>Best of luck and great sales with your dealership</p>
+    <p>Your Car-Sale-Platform</p>
+{% endblock %}

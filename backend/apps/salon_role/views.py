@@ -1,0 +1,56 @@
+from rest_framework import status
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.response import Response
+
+from core.tasks.send_role_deleted_email_task import send_role_deleted_email_task
+
+from apps.salon_role.filter import SalonRoleFilter
+from apps.salon_role.models import SalonRoleModels
+from apps.salon_role.permissions import CanManageSalonRole, IsSalonMemberOrAdmin
+from apps.salon_role.serializers import SalonRoleSerializer
+
+
+class SalonRoleListApiView(ListAPIView):
+    """
+        get:
+            get auto salon role list
+    """
+    queryset = SalonRoleModels.objects.all()
+    serializer_class = SalonRoleSerializer
+    permission_classes = (IsSalonMemberOrAdmin,)
+    filterset_class = SalonRoleFilter
+
+
+class SalonRoleRetrieveDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    """
+        get:
+            get auto salon role by id
+        delete:
+            delete auto salon role by id
+    """
+    queryset = SalonRoleModels.objects.all()
+    serializer_class = SalonRoleSerializer
+    permission_classes = (IsSalonMemberOrAdmin, CanManageSalonRole)
+    http_method_names = ['get', 'delete']
+
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        send_role_deleted_email_task.delay(
+            instance.user.email,
+            instance.user.profile.name,
+            instance.auto_salon.name,
+            instance.role
+        )
+
+        if request.user == instance.user:
+            if instance.role == 'superuser':
+                auto_salon = instance.auto_salon
+                auto_salon.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
