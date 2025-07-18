@@ -92,18 +92,20 @@ ASGI_APPLICATION = 'configs.asgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
         'OPTIONS': {
-            'ssl_mode': os.environ.get('DB_SSL_MODE'),
-            'ssl': {
-                'ca': os.environ.get('MYSQL_ATTR_SSL_CA')
-            }
-        }
+            'sslmode': os.getenv('DB_SSL_MODE'),
+        },
+        'TEST': {
+            'NAME': 'test_neondb',
+            'DEPENDENCIES': [],
+            'MIRROR': None,
+        },
     }
 }
 

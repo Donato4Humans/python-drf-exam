@@ -1,10 +1,19 @@
-.seller-page {
-    width: 400px;
-    height: 400px;
+.listings-page, .seller-page, .auto-salon-page, .admin-page {
+    width: 100%;
+    max-width: 500px;
+    min-height: calc(100vh - 140px);
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 60px;
-    box-shadow: 0 0 2px 2px rgba(0 0 0);
+    gap: 30px;
+    background-color: #F5F5F5;
+    padding: 20px;
+}
+
+.listings-page h1, .seller-page h1, .auto-salon-page h1, .admin-page h1 {
+    color: #333333;
+    font-size: 1.6rem;
+    font-weight: 600;
 }

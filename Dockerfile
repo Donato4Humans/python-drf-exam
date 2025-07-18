@@ -15,6 +15,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 ENV PATH="$POETRY_HOME/bin:$PATH"
 
 RUN apk update && apk add --no-cache --virtual .build-deps gcc musl-dev mariadb-dev curl \
+    && apk add --no-cache postgresql-client \
     && curl -sSL https://install.python-poetry.org | python3 - \
     && apk del curl
 
