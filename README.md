@@ -266,19 +266,3 @@ DATABASES = {
 6. python manage.py createsuperuser
 7. watch above about documentation and postman collection to work with project
 
-#### ENV_BACKUP
-
-SECRET_KEY='django-insecure-16u0ls%*958v#znux0z9w_1bj58-pk!+zfrtgd5t&vb+rs4h0#'
-DEBUG=True
-
-DB_HOST=ep-noisy-shape-a2laozjp-pooler.eu-central-1.aws.neon.tech
-DB_PORT=5432
-DB_NAME=neondb
-DB_USER=neondb_owner
-DB_PASSWORD=npg_no3GTxPlw1Jy
-DB_SSL_MODE=require
-
-EMAIL_HOST=smtp.gmail.com
-EMAIL_HOST_USER=bodk335@gmail.com
-EMAIL_HOST_PASSWORD=qvqduxsqlviqhfyp
-EMAIL_PORT=587
