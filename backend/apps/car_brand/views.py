@@ -12,7 +12,7 @@ from .serializers import CarBrandSerializer
 
 
 @method_decorator(name='get', decorator=swagger_auto_schema( security=[] ))
-class CarBrandListGreateView(ListCreateAPIView):
+class CarBrandListCreateView(ListCreateAPIView):
     """
         get:
             get car brand list
